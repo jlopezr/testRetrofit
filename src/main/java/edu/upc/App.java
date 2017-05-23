@@ -15,10 +15,12 @@ public class App
     public static class Contributor {
         public final String login;
         public final int contributions;
+        public final String avatar_url;
 
-        public Contributor(String login, int contributions) {
+        public Contributor(String login, int contributions, String avatar_url) {
             this.login = login;
             this.contributions = contributions;
+            this.avatar_url = avatar_url;
         }
     }
 
@@ -29,7 +31,7 @@ public class App
                 @Path("repo") String repo);
     }
 
-    public static void main( String[] args ) throws java.io.IOException
+    public static void main( String[] args ) throws IOException
     {
 
         // Create a very simple REST adapter which points the GitHub API.
@@ -47,7 +49,7 @@ public class App
         // Fetch and print a list of the contributors to the library.
         List<Contributor> contributors = call.execute().body();
         for (Contributor contributor : contributors) {
-            System.out.println(contributor.login + " (" + contributor.contributions + ")");
+            System.out.println(contributor.login + " (" + contributor.contributions + ") "+ contributor.avatar_url);
         }
     }
 }
